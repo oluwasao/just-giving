@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GiftAidCalculator.TestConsole;
+using GiftAidCalculator.TestConsole.GiftAid;
+using GiftAidCalculator.TestConsole.TaxRate;
 using NUnit;
 using NUnit.Framework;
 
@@ -15,7 +17,7 @@ namespace GiftAidCalculator.Tests
         ITaxRateService _taxRateService = new TaxRateService();
 
         [Test]
-        public void Should_Return_Twenty_Five_When_Donation_Is_Hundred_And_Tax_Rate_Is_20()
+        public void Should_Return_Correct_Gift_Aid_Amount_When_Donation_Is_Hundred()
         {             
             decimal donation = 100;            
 
@@ -24,7 +26,7 @@ namespace GiftAidCalculator.Tests
         }
 
         [Test]
-        public void Should_Return_Zero_Point_Two_Five_When_Donation_is_One_And_Tax_Rate_Is_20()
+        public void Should_Return_Correct_Gift_Aid_Amount_When_Donation_Is_One()
         {         
             decimal donation = 1;
          
@@ -34,7 +36,7 @@ namespace GiftAidCalculator.Tests
         }
 
         [Test]
-        public void Should_Return_Zero_When_Donation_is_Zero_And_Tax_Rate_Is_20()
+        public void Should_Return_Correct_Gift_Aid_Amount_When_Donation_Is_Zero()
         {
             decimal donation = 0;
 
@@ -44,18 +46,18 @@ namespace GiftAidCalculator.Tests
         }
         
         [Test]
-        public void Should_Return_Thirty_When_Donation_Is_Hundred_And_Tax_Rate_In_DataStore_Is_Twenty_Five()
+        public void Should_Calculate_Gift_Aid_Based_On_Tax_Rate_In_DataStore()
         {
-            _taxRateService.SaveTaxRate(24);
+            _taxRateService.SaveTaxRate(15);
             decimal taxRate = _taxRateService.GetTaxRate();
             decimal donation = 100;
 
             decimal giftAid = _giftAidService.CalculateGiftAid(donation, taxRate);
-            Assert.AreEqual(30m, giftAid);
+            Assert.AreEqual(17.65m, giftAid);
         }
 
         [Test]
-        public void Should_Round_To_Two_Decimal_Places()
+        public void Should_Round_Gift_Aid_To_Two_Decimal_Places()
         {
             decimal donation = 15.33m;
 

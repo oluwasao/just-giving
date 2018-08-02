@@ -5,17 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GiftAidCalculator.TestConsole.EventGiftAidSupplement;
 
 namespace GiftAidCalculator.Tests
 {
     [TestFixture]
     public class EventSupplementServiceTest
     {
-        IEventSupplementService _eventSupplementService;
+        IEventGiftAidSupplementService _eventSupplementService;
         [Test]
-        public void Should_Return_Twenty_Five_When_Donation_Is_Hundred_And_Event_Type_Is_Other()
+        public void Should_Add_Correct_Supplement_When_Event_Type_Is_Other()
         {
-            _eventSupplementService = new EventSupplementService(EventType.Other);
+            _eventSupplementService = new OtherEventGiftAidSupplementService();
             decimal giftAid = 100m;            
 
             decimal totalGiftAid = _eventSupplementService.AddSupplement(giftAid);
@@ -23,22 +24,22 @@ namespace GiftAidCalculator.Tests
         }
 
         [Test]
-        public void Should_Return_Twelve_Point_Five_When_Donation_Is_Fifty_And_Event_Type_Is_Running()
+        public void Should_Add_Correct_Supplement_When_Event_Type_Is_Running()
         {
-            _eventSupplementService = new EventSupplementService(EventType.Running);
+            _eventSupplementService = new RunningEventGiftAidSupplementService();
             decimal giftAid = 50m;
 
             decimal totalGiftAid = _eventSupplementService.AddSupplement(giftAid);
-            Assert.AreEqual(12.5m, totalGiftAid);
+            Assert.AreEqual(52.5m, totalGiftAid);
         }
 
         [Test]
-        public void Should_Return_Six_Point_Two_Five_When_Donation_Is_Twenty_Five_And_Event_Type_Is_Swimming()
+        public void Should_Add_Correct_Supplement_When_Event_Type_Is_Swimming()
         {
-            _eventSupplementService = new EventSupplementService(EventType.Swimming);
+            _eventSupplementService = new SwimmingEventGiftAidSupplementService();
             decimal giftAid = 25m;                        
             decimal totalGiftAid = _eventSupplementService.AddSupplement(giftAid);
-            Assert.AreEqual(6.25m, giftAid);
+            Assert.AreEqual(25.75m, totalGiftAid);
         }
     }
 }

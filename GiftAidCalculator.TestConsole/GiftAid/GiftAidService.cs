@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GiftAidCalculator.TestConsole
+namespace GiftAidCalculator.TestConsole.GiftAid
 {
     public class GiftAidService : IGiftAidService
     {

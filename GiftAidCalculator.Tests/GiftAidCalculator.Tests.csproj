@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateGiftAidTest.cs" />
     <Compile Include="EventSupplementServiceTest.cs" />
     <Compile Include="GiftAidServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

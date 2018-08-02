@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GiftAidCalculator.TestConsole.TaxRate;
 
 namespace GiftAidCalculator.Tests
 {
@@ -13,7 +14,7 @@ namespace GiftAidCalculator.Tests
     {
         ITaxRateService taxRateService = new TaxRateService();
         [Test]
-        public void Should_Update_Tax_Rate_To_40_When_Updated()
+        public void Should_Update_Tax_Rate()
         {
             taxRateService.SaveTaxRate(40);            
 

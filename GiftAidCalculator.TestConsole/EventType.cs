@@ -8,8 +8,8 @@ namespace GiftAidCalculator.TestConsole
 {
     public enum EventType
     {
-        Running,
-        Swimming,
-        Other
+        Running=1,
+        Swimming=2,
+        Other=3
     }
 }
