@@ -68,11 +68,11 @@
     <Compile Include="EventSupplementService.cs" />
     <Compile Include="EventType.cs" />
     <Compile Include="GiftAidService.cs" />
+    <Compile Include="IEventSupplementService.cs" />
     <Compile Include="IGiftAidService.cs" />
     <Compile Include="ITaxRateService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxRateRepository.cs" />
     <Compile Include="TaxRateService.cs" />
   </ItemGroup>
   <ItemGroup>

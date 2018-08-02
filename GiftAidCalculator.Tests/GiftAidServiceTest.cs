@@ -11,46 +11,56 @@ namespace GiftAidCalculator.Tests
     [TestFixture]
     public class GiftAidServiceTest
     {
-        GiftAidService _giftAidService = new GiftAidService();
+        IGiftAidService _giftAidService = new GiftAidService();
+        ITaxRateService _taxRateService = new TaxRateService();
+
         [Test]
-        public void Should_Return_Twenty_Five_When_Donation_Is_Hundred()
-        {
-            //arrange            
-            decimal donation = 100;
-            //act
-            decimal giftAid = _giftAidService.CalculateGiftAid(donation);
-            //assert
-            Assert.AreEqual(25, giftAid);
+        public void Should_Return_Twenty_Five_When_Donation_Is_Hundred_And_Tax_Rate_Is_20()
+        {             
+            decimal donation = 100;            
+
+            decimal giftAid = _giftAidService.CalculateGiftAid(donation,20);         
+            Assert.AreEqual(25m, giftAid);
         }
 
         [Test]
-        public void Should_Return_Zero_Point_Two_Five_When_Donation_is_One()
-        {
-            //arrange            
+        public void Should_Return_Zero_Point_Two_Five_When_Donation_is_One_And_Tax_Rate_Is_20()
+        {         
             decimal donation = 1;
-            //act
-            decimal giftAid = _giftAidService.CalculateGiftAid(donation);
-            //assert
+         
+            decimal giftAid = _giftAidService.CalculateGiftAid(donation,20);
+         
             Assert.AreEqual(0.25m, giftAid);
         }
 
         [Test]
-        public void Should_Return_Twenty_Five_When_Donation_Is_Hundred_And_Event_Type_Is_Other()
+        public void Should_Return_Zero_When_Donation_is_Zero_And_Tax_Rate_Is_20()
         {
+            decimal donation = 0;
+
+            decimal giftAid = _giftAidService.CalculateGiftAid(donation,20);
+
+            Assert.AreEqual(0m, giftAid);
+        }
+        
+        [Test]
+        public void Should_Return_Thirty_When_Donation_Is_Hundred_And_Tax_Rate_In_DataStore_Is_Twenty_Five()
+        {
+            _taxRateService.SaveTaxRate(24);
+            decimal taxRate = _taxRateService.GetTaxRate();
             decimal donation = 100;
-            _giftAidService.EventType = EventType.Other;
-            decimal giftAid = _giftAidService.CalculateGiftAid(donation);
-            Assert.AreEqual(25, giftAid);
+
+            decimal giftAid = _giftAidService.CalculateGiftAid(donation, taxRate);
+            Assert.AreEqual(30m, giftAid);
         }
 
         [Test]
-        public void Should_Return_Twenty_Five_When_Donation_Is_50_And_Event_Type_Is_Running()
+        public void Should_Round_To_Two_Decimal_Places()
         {
-            decimal donation = 50;
-            _giftAidService.EventType = EventType.Running;
-            decimal giftAid = _giftAidService.CalculateGiftAid(donation);
-            Assert.AreEqual(12.5, giftAid);
-        }
+            decimal donation = 15.33m;
 
+            decimal giftAid = _giftAidService.CalculateGiftAid(donation,20);
+            Assert.AreEqual(3.83m, giftAid);
+        }
     }
 }

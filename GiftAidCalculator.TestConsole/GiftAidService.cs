@@ -1,23 +1,13 @@
-﻿namespace GiftAidCalculator.TestConsole
+﻿using System;
+
+namespace GiftAidCalculator.TestConsole
 {
     public class GiftAidService : IGiftAidService
     {
-        decimal _taxRate = 20;
-        public EventType EventType = EventType.Other;
-        
-        EventSupplementService _eventSupplementService = new EventSupplementService();        
-        public decimal CalculateGiftAid(decimal donationAmount)
+        public decimal CalculateGiftAid(decimal donationAmount, decimal taxRate)
         {
-            decimal giftAid = donationAmount *(_taxRate / (100 - _taxRate));
-            giftAid += AddSupplement(giftAid);
-            return giftAid;
-        }
-
-        public decimal AddSupplement(decimal giftAid)
-        {
-            decimal supplement = _eventSupplementService.GetEventSupplement(EventType);
-            giftAid += (supplement / 100) * giftAid;
-            return 0;
-        }
+            decimal giftAid = donationAmount * (taxRate / (100m - taxRate));
+            return Math.Round(giftAid, 2);
+        }        
     }
 }

@@ -6,8 +6,7 @@ using System.Text;
 namespace GiftAidCalculator.TestConsole
 {
     public interface IGiftAidService
-    {        
-        decimal CalculateGiftAid(decimal donationAmout);
-        decimal AddSupplement(decimal giftAid);
+    {
+        decimal CalculateGiftAid(decimal donationAmount, decimal taxRate);
     }
 }

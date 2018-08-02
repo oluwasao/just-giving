@@ -8,19 +8,14 @@ namespace GiftAidCalculator.TestConsole
 {
     public class TaxRateService : ITaxRateService
     {
-        TaxRateRepository _taxRateRepository;
-        public TaxRateService()
+        decimal _currentTaxRate = 20;
+        public void SaveTaxRate(decimal currentTaxRate)
         {
-            _taxRateRepository = new TaxRateRepository();
+            _currentTaxRate = currentTaxRate;
         }
         public decimal GetTaxRate()
         {
-            return _taxRateRepository.GetTaxRate();
-        }
-
-        public void SaveTaxRate(decimal taxRate)
-        {
-            _taxRateRepository.SaveTaxRate(taxRate);
+            return _currentTaxRate;
         }
     }
 }
